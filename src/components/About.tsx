@@ -83,9 +83,9 @@ const About = () => {
               >
                 <h3 className="text-xl font-semibold text-purple-800 mb-2">MagikLabs Philosophy</h3>
                 <p className="text-purple-700">
-                  "I believe in creating tools that not only boost productivity but also bring joy to 
+                  I believe in creating tools that not only boost productivity but also bring joy to 
                   everyday tasks. MagikLabs is where imagination meets functionality, turning routine 
-                  work into magical experiences."
+                  work into magical experiences.
                 </p>
               </motion.div>
             </motion.div>
