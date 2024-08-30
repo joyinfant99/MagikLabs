@@ -8,11 +8,11 @@ import SegmentedControl from './SegmentedControl';
 interface ProductSectionProps {
   products: {
     [key: string]: Array<{
-      name: string;
-      tagline: string;
-      description: string;
-      status: string;
-      type: string;
+        name: string;
+        tagline: string;
+        description: string;
+        status: 'Explore' | 'Beta' | 'Coming Soon';
+        type: 'WebApp' | 'Channel' | 'Blog';
     }>;
   };
 }

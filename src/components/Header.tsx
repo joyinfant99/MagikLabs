@@ -6,7 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import About from './About';  // Make sure this path is correct
 
-const MobileMenuDrawer = ({ isOpen, onClose }) => {
+interface MobileMenuDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({ isOpen, onClose }) => {
   const drawerVariants = {
     closed: { x: "100%", transition: { type: "spring", stiffness: 300, damping: 30 } },
     open: { x: 0, transition: { type: "spring", stiffness: 300, damping: 30 } }
@@ -55,7 +60,7 @@ const MobileMenuDrawer = ({ isOpen, onClose }) => {
 };
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);

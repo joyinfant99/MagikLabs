@@ -12,15 +12,11 @@ type Product = {
   name: string;
   tagline: string;
   description: string;
-  status: string;
-  type: string;
+  status: 'Explore' | 'Beta' | 'Coming Soon';
+  type: 'WebApp' | 'Channel' | 'Blog';
 };
 
-type ProductsType = {
-  [key in ProductCategory]: Product[];
-};
-
-const products = {
+const products: Record<ProductCategory, Product[]> = {
   All: [
     {
       name: "ReplyMagik",
@@ -126,22 +122,22 @@ export default function Home() {
     <div className="bg-white min-h-screen flex flex-col">
       <Hero />
       <main className="container mx-auto px-4 py-8 flex-grow">
-        <SegmentedControl
-          options={['All', 'SalesTech', 'Productivity', 'Others']}
-          onChange={(category) => setSelectedCategory(category as ProductCategory)}
-          initialSelected="All"
-        />
+      <SegmentedControl
+        options={['All', 'SalesTech', 'Productivity', 'Others'] as const}
+        onChange={(category) => setSelectedCategory(category as ProductCategory)}
+        initialSelected="All"
+      />
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {products[selectedCategory as ProductCategory].map((product, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <ProductCard {...product} />
-            </motion.div>
-          ))}
+        {products[selectedCategory as ProductCategory].map((product, index) => (
+          <motion.div key={index} variants={itemVariants}>
+            <ProductCard {...product} />
+          </motion.div>
+        ))}
         </motion.div>
       </main>
     </div>
