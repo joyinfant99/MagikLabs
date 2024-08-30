@@ -6,6 +6,20 @@ import ProductCard from '@/components/ProductCard';
 import SegmentedControl from '@/components/SegmentedControl';
 import Hero from '@/components/Hero';
 
+type ProductCategory = 'All' | 'SalesTech' | 'Productivity' | 'Others';
+
+type Product = {
+  name: string;
+  tagline: string;
+  description: string;
+  status: string;
+  type: string;
+};
+
+type ProductsType = {
+  [key in ProductCategory]: Product[];
+};
+
 const products = {
   All: [
     {
@@ -88,7 +102,7 @@ const products = {
 };
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('All');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -114,7 +128,7 @@ export default function Home() {
       <main className="container mx-auto px-4 py-8 flex-grow">
         <SegmentedControl
           options={['All', 'SalesTech', 'Productivity', 'Others']}
-          onChange={setSelectedCategory}
+          onChange={(category) => setSelectedCategory(category as ProductCategory)}
           initialSelected="All"
         />
         <motion.div 
@@ -123,7 +137,7 @@ export default function Home() {
           initial="hidden"
           animate="visible"
         >
-          {products[selectedCategory].map((product, index) => (
+          {products[selectedCategory as ProductCategory].map((product, index) => (
             <motion.div key={index} variants={itemVariants}>
               <ProductCard {...product} />
             </motion.div>
